@@ -1,0 +1,9 @@
+<?php
+
+return $dbConfig = [
+    "host"   => "localhost",
+    "port"   => 3306,
+    "dbname" => "poo_exo",
+    "user"   => "root",
+    "pass"   => "",
+];
