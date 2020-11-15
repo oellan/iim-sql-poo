@@ -12,7 +12,7 @@ class Database{
     public function __construct()
     {
         try {
-            require "Config/config.php";
+            require_once "Config/config.php";
             $this->host = $dbConfig["host"];
             $this->dbname = $dbConfig["dbname"];
             $this->user = $dbConfig["user"];
