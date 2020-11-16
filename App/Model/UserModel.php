@@ -17,13 +17,15 @@ class UserModel extends Database{
         ]);
     }
 
-    public function addUser($username, $password, $email)
+    public function addUser($username, $password, $email, $first_name, $last_name)
     {
-
-        return $this->prepare("INSERT INTO users(username, password, email) VALUES(?,?,?)", [
+        $hashpass = password_hash($password, PASSWORD_BCRYPT);
+        return $this->prepare("INSERT INTO users(username, password, email, first_name, last_name) VALUES(?,?,?,?,?)", [
             $username,
-            $password,
-            $email
+            $hashpass,
+            $email,
+            $first_name,
+            $last_name
         ]);
     }
 
