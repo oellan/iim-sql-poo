@@ -1,13 +1,13 @@
 <?php
 namespace App\Controller;
 
-use App\Model\SondageModel;
+use App\Model\UserModel;
 
 class HomeController extends AbstractController {
 
     public function __construct()
     {
-        parent::__construct(new SondageModel());
+        parent::__construct(new UserModel());
     }
 
     public function renderIndex(){
