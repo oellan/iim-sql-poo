@@ -2,6 +2,7 @@
 
 use App\Controller\HomeController;
 use App\Controller\SecurityController;
+use App\Controller\SondageController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
@@ -10,6 +11,9 @@ if(array_key_exists("page", $_GET)){
             break;
         case 'register':
             (new SecurityController())->renderRegister();
+            break;
+        case 'sondage':
+            (new SondageController())->renderIndex();
             break;
         default:
             # code...
