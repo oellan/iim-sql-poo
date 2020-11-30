@@ -22,6 +22,7 @@ h1{
     background-color: #ffffff;
     padding: 1%;
     border-radius: 20px;
+    margin-top: 30px;
 }
 
 .form{
@@ -39,7 +40,7 @@ h1{
     width: 100%;
 }
 
-#button{
+#button, button{
     cursor: pointer;
     width: 40%;
     background: #000000;
@@ -48,9 +49,6 @@ h1{
     font-size: 14px;
 }
 
-button {
-    width: 10%;
-}
 
 
 button:hover {
