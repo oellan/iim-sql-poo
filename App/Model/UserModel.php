@@ -62,4 +62,14 @@ class UserModel extends Database{
             ]);
         }else return false;
     }
+
+
+    // FRIENDS
+    public function getFriends($id){
+        $friends = $this->getInfoUser($_SESSION['id'], 'friends');
+        if(empty($friends)) $friends = [];
+        else $friends = explode("/", $friends);
+
+        return $friends;
+    }
 }

@@ -20,26 +20,26 @@
         <input type="submit" id="button" name="search_submit" value="Rechercher"/>
     </form>
 
-    <tr>
-        <tr>
-            <?php
+    <table>
 
-            foreach($users as $user)
-            {
-                if((int)$user['id'] === $_SESSION['id'] || in_array($user['username'], $friends)) continue;
-                ?>
+        <?php
 
+        foreach($users as $user)
+        {
+            if((int)$user['id'] === $_SESSION['id'] || in_array($user['id'], $friends)) continue;
+            ?>
+            <tr>
                 <form method="post">
                     <input type="hidden" name="user_id" value="<?=$user['id']?>">
                     <td><?=$user['username']?></td>
                     <td><button type="submit" name="add_submit">Ajouter</button></td>
                 </form>
+            </tr>
 
-                <?php
-            }
+            <?php
+        }
 
-            ?>
-        </tr>
+        ?>
     </table>
 
     <p>
@@ -49,6 +49,38 @@
 
         ?>
     </p>
+
+</div>
+
+<div class="contour">
+
+    <h1>Vos amis</h1>
+
+    <table>
+
+        <?php
+
+        if(!empty($friends)) {
+
+            foreach($friends as $friend_id)
+            {
+                $friend = $this->model->getUserBy('id', $friend_id)
+                ?>
+                <tr>
+                    <form method="post">
+                        <input type="hidden" name="user_id" value="<?=$friend['id']?>">
+                        <td><?=$friend['username']?></td>
+                        <td><button type="submit" name="delete_submit">Supprimer</button></td>
+                    </form>
+                </tr>
+
+                <?php
+            }
+
+        }else echo '<p>Aucun amis</p>';
+
+        ?>
+    </table>
 
 </div>
 
