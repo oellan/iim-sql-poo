@@ -9,14 +9,14 @@ use RuntimeException;
 class Database
 {
 
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
         try {
             $dbConfig = include "Config/config.php";
             if ($dbConfig === false) {
-                throw new RuntimeException("Please use config.php.template to create a valid config.php file");
+                throw new RuntimeException("Please use config.php to create a valid config.php file");
             }
             $this->pdo = new PDO(
                 'mysql:host=' . $dbConfig["host"] . ':' . $dbConfig["port"] . ';dbname=' . $dbConfig["dbname"],
@@ -37,7 +37,7 @@ class Database
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function prepare($statement, $data = [])
+    public function prepare($statement, $data = []):array
     {
         $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);
