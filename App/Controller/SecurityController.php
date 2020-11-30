@@ -16,6 +16,8 @@ class SecurityController extends AbstractController
 
     public function renderRegister(){
 
+        if($this->auth->islogged()) $this->redirectToRoute('home');
+
         $msg = [];
 
         if(!empty($_POST))
@@ -45,6 +47,8 @@ class SecurityController extends AbstractController
 
     public function renderLogin(){
 
+        if($this->auth->islogged()) $this->redirectToRoute('home');
+
         $msg = [];
 
         if(!empty($_POST))
@@ -54,8 +58,7 @@ class SecurityController extends AbstractController
                 $username = $_POST['user_name'];
                 $password = $_POST['user_password'];
 
-                $auth = new Auth();
-                $auth_value = $auth->login($username, $password);
+                $auth_value = $this->auth->login($username, $password);
                 if($auth_value) {
                     $this->redirectToRoute('home');
                 }else $msg['error'] = 'Le pseudo ou le mot de passe est incorrect.';
@@ -67,5 +70,12 @@ class SecurityController extends AbstractController
 
         require $this->render("connexionView.php");
 
+    }
+
+    public function logout(){
+        session_unset();
+        session_destroy();
+        $this->redirectToRoute('home');
+        exit();
     }
 }

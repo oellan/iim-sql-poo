@@ -5,13 +5,18 @@ use App\Model\UserModel;
 
 class auth {
 
-    public function __construct()
+    public function __construct($model)
     {
-        $this->model = new UserModel();
+        $this->model = $model;
+    }
+
+    public function islogged(){
+        if(isset($_SESSION['id'])) return true;
+        return false;
     }
 
     public function login($username, $hashpass){
-        $current_user = $this->model->getUserBy('username', $username)[0];
+        $current_user = $this->model->getUserBy('username', $username);
 
         if(!empty($current_user) && password_verify($hashpass, $current_user['password'])){
             $_SESSION['id'] = (int)$current_user['id'];

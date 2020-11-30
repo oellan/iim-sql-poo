@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use Core\security\auth;
+
 class AbstractController {
 
     private $routes = [];
@@ -30,10 +32,12 @@ class AbstractController {
     public function __construct($model)
     {
         $this->model = $model;
+        $this->auth = new Auth($model);
         $this->addRoutes([
             "home" => "",
             "register" => "?page=register",
             "login" => "?page=login",
+            "friendssearch" => "?page=friendssearch"
         ]);
     }
 

@@ -19,7 +19,7 @@ class Database
                 throw new RuntimeException("Please use config.php.template to create a valid config.php file");
             }
             $this->pdo = new PDO(
-                'mysql:host=' . $dbConfig["host"] . ':' . $dbConfig["port"] . ';dbname=' . $dbConfig["dbname"],
+                'mysql:host=' . $dbConfig["host"] . ':' . $dbConfig["port"] . ';dbname=' . $dbConfig["dbname"] . ";charset=utf8mb4",
                 $dbConfig["user"],
                 $dbConfig["pass"]
             );
@@ -37,10 +37,14 @@ class Database
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function prepare($statement, $data = [])
+    public function prepare($statement, $data = [], $one = false)
     {
         $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);
+
+        if ($one) {
+            return $prepare->fetch();
+        }
         return $prepare->fetchAll();
     }
 }
