@@ -1,6 +1,3 @@
-<?php
-?>
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -22,8 +19,16 @@
         <input type="text" id="name" name="user_name"  placeholder="Votre pseudo" />
         <input type="email" id="mail" name="user_email"  placeholder="Votre email" />
         <input type="password" id="password" name="user_password"  placeholder="Mot de passe" />
-        <input type="button" id="button" value="M'inscrire"/>
+        <input type="submit" id="button" value="M'inscrire"/>
     </form>
+
+    <p>
+        <?php
+
+            if(isset($msg['error'])) echo $msg['error'];
+
+        ?>
+    </p>
 
 </div>
 

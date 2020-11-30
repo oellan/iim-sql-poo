@@ -1,16 +1,15 @@
 <?php
 
 use App\Controller\HomeController;
-use App\Controller\LoginController;
-use App\Controller\RegisterController;
+use App\Controller\SecurityController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
         case 'login':
-            (new LoginController())->renderIndex();
+            (new SecurityController())->renderLogin();
             break;
         case 'register':
-            (new RegisterController())->renderIndex();
+            (new SecurityController())->renderRegister();
             break;
         default:
             # code...

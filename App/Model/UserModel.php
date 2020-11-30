@@ -10,22 +10,20 @@ class UserModel extends Database{
         return $this->query("SELECT * FROM users");
     }
 
-    public function getUser($username)
+    public function getUserBy($type, $value)
     {
-        return $this->prepare("SELECT * FROM users where username = ?", [
-            $username
+        return $this->prepare("SELECT * FROM users where $type = ?", [
+            $value
         ]);
     }
 
-    public function addUser($username, $password, $email, $first_name, $last_name)
+    public function addUser($username, $email, $password)
     {
         $hashpass = password_hash($password, PASSWORD_BCRYPT);
-        return $this->prepare("INSERT INTO users(username, password, email, first_name, last_name) VALUES(?,?,?,?,?)", [
+        return $this->prepare("INSERT INTO users(username, email, password) VALUES(?,?,?)", [
             $username,
-            $hashpass,
             $email,
-            $first_name,
-            $last_name
+            $hashpass,
         ]);
     }
 

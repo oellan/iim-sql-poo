@@ -8,8 +8,6 @@
 
     <main>
 
-        <?= var_dump($players) ?>
-
     </main>
 
 </body>
