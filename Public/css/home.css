@@ -10,7 +10,13 @@ body{
 
 }
 
+.top_main{
+    background-color: #ffffff;
+    box-shadow: grey 0 2px 5px;
+}
+
 h1{
+    align-items: center;
     text-align: center;
     font-size: 30px;
     margin-top: 3%;
