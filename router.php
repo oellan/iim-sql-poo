@@ -5,7 +5,6 @@ use App\Controller\AbstractController;
 use App\Controller\creaSondageController;
 use App\Controller\FriendController;
 use App\Controller\HomeController;
-use App\Controller\profilController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
 use App\Controller\sondageResultController;
@@ -35,7 +34,7 @@ if(array_key_exists("page", $_GET)){
             (new sondageResultController())->renderIndex();
             break;
         case 'profil':
-            (new profilController())->renderIndex();
+            (new HomeController())->renderProfile();
             break;
         case 'creaSondage':
             (new creaSondageController())->renderIndex();
