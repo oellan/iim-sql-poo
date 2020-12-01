@@ -11,6 +11,7 @@
         if($this->auth->islogged()){
             echo '<a class="link" href="?page=logout">Se déconnecter</a>';
             echo '<a href="?page=friendssearch">Ajouter un ami</a>';
+            echo '<a href="?page=profil">Mon profil</a>';
         }
         else echo '<a class="link" href="?page=login">Se connecter</a><a href="?page=register">S\'enregistrer</a>';
         ?>
