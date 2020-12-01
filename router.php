@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\creaSondageController;
 use App\Controller\HomeController;
 use App\Controller\profilController;
 use App\Controller\SecurityController;
@@ -33,6 +34,9 @@ if(array_key_exists("page", $_GET)){
             break;
         case 'profil':
             (new profilController())->renderIndex();
+            break;
+        case 'creaSondage':
+            (new creaSondageController())->renderIndex();
             break;
         default:
             # code...
