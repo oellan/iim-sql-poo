@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Core\Database;
+use DateTime;
 
 class SondageModel
     extends Database
@@ -21,7 +22,7 @@ ORDER BY polls.creation DESC'
     public function getAllForUsername(string $username): array
     {
         return $this->prepare(
-            'SELECT polls.title, users.username, polls.creation 
+            'SELECT polls.title, users.username, polls.creation, polls.end_time
 FROM polls 
 INNER JOIN users on polls.author_id = users.id
 WHERE polls.username = :username
@@ -33,7 +34,7 @@ ORDER BY polls.creation DESC',
     public function getById(int $id): array
     {
         return $this->prepare(
-            'SELECT polls.title, users.username, poll_responses.content, poll_responses.votes, poll_responses.id
+            'SELECT polls.title, users.username, poll_responses.content, poll_responses.votes, poll_responses.id, polls.end_time
 FROM poll_responses
          INNER JOIN polls on poll_responses.poll_id = polls.id
          INNER JOIN users on polls.author_id = users.id
@@ -44,7 +45,7 @@ WHERE polls.id = :id', ['id' => $id]
     public function getLatest(int $count): array
     {
         return $this->prepare(
-            'SELECT polls.title, users.username, polls.creation
+            'SELECT polls.title, users.username, polls.creation, polls.end_time
 FROM polls
          INNER JOIN users on polls.author_id = users.id
 ORDER BY polls.creation DESC
@@ -53,13 +54,14 @@ LIMIT :maxPolls',
         );
     }
 
-    public function addPoll(string $title, int $authorId, array $responses)
+    public function addPoll(string $title, int $authorId, array $responses, DateTime $endTime)
     {
         $id = $this->prepare(
-            'INSERT INTO polls(title, author_id, creation) VALUES (:title,:authorId,NOW()) RETURNING id',
+            'INSERT INTO polls(title, author_id, creation, end_time) VALUES (:title,:authorId,NOW(),:endTime) RETURNING id',
             [
                 ':title'    => $title,
                 ':authorId' => $authorId,
+                ':endTime'=>$endTime->format('Y-m-d H:i:s')
             ]
         );
         if ($id === false) {
