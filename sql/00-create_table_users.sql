@@ -3,7 +3,7 @@ CREATE TABLE `users` (
     `username` TEXT NOT NULL COLLATE utf8mb4_bin,
     `email` TEXT NOT NULL COLLATE utf8mb4_bin,
     `password` TEXT(60) NOT NULL COLLATE ascii_bin,
-    `friends` text COLLATE utf8mb4_bin NOT NULL,
+    `friends` text COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 ALTER TABLE `users`
