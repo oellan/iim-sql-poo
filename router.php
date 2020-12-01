@@ -9,6 +9,10 @@ use App\Controller\sondageResultController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
+
+        case 'home':
+            (new HomeController())->renderLogin();
+            break;
         case 'login':
             (new SecurityController())->renderLogin();
             break;

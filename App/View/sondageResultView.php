@@ -22,7 +22,7 @@
         <h2>Commentaires :</h2>
 
         <div class="write_com">
-            <input type="text" id="com_content" name="com_content" placeholder="Ecrire un commentaire">
+            <textarea id="com_content" name="com_content" placeholder="Ecrire un commentaire"></textarea>
             <input type="button" id="button" value="Envoyer"/>
 
         </div>
