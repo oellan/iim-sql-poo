@@ -3,7 +3,7 @@
 namespace Core\security;
 use App\Model\UserModel;
 
-class auth {
+class Auth {
 
     public function __construct($model)
     {
