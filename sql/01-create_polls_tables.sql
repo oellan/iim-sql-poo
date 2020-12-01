@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `poo_exo`.`polls`;
-DROP TABLE IF EXISTS `poo_exo`.`poll_responses`;
+DROP TABLE IF EXISTS `polls`;
+DROP TABLE IF EXISTS `poll_responses`;
 
-CREATE TABLE `poo_exo`.`polls`
+CREATE TABLE `polls`
 (
     `id`        INT AUTO_INCREMENT,
     `title`     TEXT                                 NULL,
@@ -14,10 +14,10 @@ CREATE TABLE `poo_exo`.`polls`
         FOREIGN KEY (`author_id`) REFERENCES `poo_exo`.`users` (`id`)
 );
 
-ALTER TABLE `poo_exo`.`polls`
+ALTER TABLE `polls`
     ADD PRIMARY KEY (`id`);
 
-CREATE TABLE `poo_exo`.`poll_responses`
+CREATE TABLE `poll_responses`
 (
     `id`      INT AUTO_INCREMENT
         PRIMARY KEY,
@@ -25,6 +25,6 @@ CREATE TABLE `poo_exo`.`poll_responses`
     `content` TEXT NULL,
     `votes`   INT  NULL,
     CONSTRAINT `poll_responses_polls_id_fk`
-        FOREIGN KEY (`poll_id`) REFERENCES `poo_exo`.`polls` (`id`)
+        FOREIGN KEY (`poll_id`) REFERENCES `polls` (`id`)
 );
 
