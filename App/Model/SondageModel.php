@@ -52,4 +52,26 @@ LIMIT :maxPolls',
             [':maxPolls' => $count]
         );
     }
+
+    public function addPoll(string $title, int $authorId, array $responses)
+    {
+        $id = $this->prepare(
+            'INSERT INTO polls(title, author_id, creation) VALUES (:title,:authorId,NOW()) RETURNING id',
+            [
+                ':title'    => $title,
+                ':authorId' => $authorId,
+            ]
+        );
+        if ($id === false) {
+            return false;
+        }
+        $id = $id['id'];
+        $query = 'INSERT INTO poll_response(poll_id,content,votes) VALUES ';
+        $queryFragment = '';
+        for ($i = 0, $iMax = count($responses); $i < $iMax; $i++) {
+            $queryFragment .= ",($id,?,0)";
+        }
+        $query .= substr($queryFragment, 1);
+        return $this->prepare($query, $responses);
+    }
 }
