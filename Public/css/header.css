@@ -1,0 +1,29 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    background-color: #000000;
+    font-family: "Open Sans" , sans-serif;
+    color: #ffffff;
+    padding: 2% 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.links{
+    width: 100%;
+    justify-content: center;
+}
+
+header a{
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 5%;
+
+
+}
+

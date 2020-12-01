@@ -11,7 +11,7 @@ if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
 
         case 'home':
-            (new HomeController())->renderLogin();
+            (new HomeController())->renderIndex();
             break;
         case 'login':
             (new SecurityController())->renderLogin();
