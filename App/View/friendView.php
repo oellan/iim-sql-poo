@@ -22,7 +22,7 @@ include ("include/header.php");
         <input type="submit" id="button" name="search_submit" value="Rechercher"/>
     </form>
 
-    <table>
+    <table id="search_table">
 
         <?php
 
@@ -58,7 +58,7 @@ include ("include/header.php");
 
     <h1>Vos amis</h1>
 
-    <table>
+    <table id="friends_table">
 
         <?php
 
@@ -72,7 +72,7 @@ include ("include/header.php");
                     <form method="post">
                         <input type="hidden" name="user_id" value="<?=$friend['id']?>">
                         <td><?=$friend['username']?></td>
-                        <td><button type="submit" name="delete_submit">Supprimer</button></td>
+                        <td><button class="delete-btn" type="submit" name="delete_submit">Supprimer</button></td>
                     </form>
                 </tr>
 

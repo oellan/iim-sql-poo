@@ -1,11 +1,13 @@
 <?php
 
+// PAGES
+use App\Controller\AbstractController;
 use App\Controller\creaSondageController;
+use App\Controller\FriendController;
 use App\Controller\HomeController;
 use App\Controller\profilController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
-use App\Controller\FriendController;
 use App\Controller\sondageResultController;
 
 if(array_key_exists("page", $_GET)){
@@ -39,10 +41,18 @@ if(array_key_exists("page", $_GET)){
             (new creaSondageController())->renderIndex();
             break;
         default:
-            # code...
+            (new AbstractController(null))->redirectToRoute('home');
             break;
     }
-} else{
+
+// FUNCTIONS
+} else if(array_key_exists("function", $_GET)){
+    switch ($_GET["function"]) {
+        default:
+            break;
+    }
+
+} else {
     $controller = new HomeController();
     $controller->renderIndex();
 }
