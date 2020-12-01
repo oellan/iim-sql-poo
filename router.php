@@ -4,6 +4,7 @@ use App\Controller\HomeController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
 use App\Controller\FriendController;
+use App\Controller\sondageResultController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
@@ -21,6 +22,9 @@ if(array_key_exists("page", $_GET)){
             break;
         case 'friendssearch':
             (new FriendController())->renderIndex();
+            break;
+        case 'sondageResult':
+            (new sondageResultController())->renderIndex();
             break;
         default:
             # code...
