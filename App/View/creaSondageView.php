@@ -24,13 +24,16 @@ include ("include/header.php");
 
     <form class="form" method="post">
         <label for="titre" >Titre:</label>
-        <input type="text" id="titre"/>
+        <input type="text" id="titre" name="poll_title"/>
         <label for="response_1" >Réponse 1:</label>
-        <input type="text" id="response_1"/>
+        <input type="text" id="response_1" name="poll_response_1"/>
         <label for="response_2" >Réponse 2:</label>
-        <input type="text" id="response_2"/>
+        <input type="text" id="response_2" name="poll_response_2"/>
+        <label for="date" >Date D'échéance</label>
+        <input id="date" type="date" name="poll_date"/>
+        <input id="date" type="time" name="poll_time"/>
 
-        <input type="submit" id="button" value="Demander à mes amis"/>
+        <input type="submit" id="button" value="Demander à mes amis" name="poll_submit"/>
     </form>
 </div>
 
