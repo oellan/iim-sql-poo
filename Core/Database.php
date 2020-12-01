@@ -37,7 +37,13 @@ class Database
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function prepare($statement, $data = [], $one = false):array
+    /**
+     * @param $statement
+     * @param array $data
+     * @param false $one
+     * @return array|bool False if empty or error else array of objects (as array) or object (as array)
+     */
+    public function prepare($statement, $data = [], $one = false)
     {
         $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);

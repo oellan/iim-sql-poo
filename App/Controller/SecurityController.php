@@ -6,65 +6,76 @@ namespace App\Controller;
 use App\Model\UserModel;
 use Core\security\Auth;
 
-class SecurityController extends AbstractController
+class SecurityController
+    extends AbstractController
 {
 
     public function __construct()
     {
-        parent::__construct(new UserModel);
+        parent::__construct(new UserModel());
     }
 
-    public function renderRegister(){
+    public function renderRegister()
+    {
 
-        if($this->auth->islogged()) $this->redirectToRoute('home');
+        if ($this->auth->islogged()) {
+            $this->redirectToRoute('home');
+            return;
+        }
 
         $msg = [];
 
-        if(!empty($_POST))
-        {
-            if(!empty($_POST['user_name']) && !empty($_POST['user_email']) && !empty($_POST['user_password']))
-            {
+        if (!empty($_POST)) {
+            if (!empty($_POST['user_name']) && !empty($_POST['user_email']) && !empty($_POST['user_password'])) {
                 $username = $_POST['user_name'];
                 $email = $_POST['user_email'];
                 $password = $_POST['user_password'];
 
-                if(!empty($this->model->getUserBy('username', $username)))
-                {
+                if ($this->model->getUserBy('username', $username) !== false) {
                     $msg['error'] = 'Ce pseudo est déjà utilisé.';
-                }else if(!empty($this->model->getUserBy('email', $email)))
-                {
+                } elseif ($this->model->getUserBy('email', $email) !== false) {
                     $msg['error'] = 'Cet email est déjà utilisé.';
-                }else{
+                } else {
                     $this->model->addUser($username, $email, $password);
                     $this->redirectToRoute('home');
+                    return;
                 }
-            } else $msg['error'] = 'Merci de remplir tous les champs.';
+            } else {
+                $msg['error'] = 'Merci de remplir tous les champs.';
+            }
 
         }
 
         require $this->render("inscriptionView.php");
     }
 
-    public function renderLogin(){
+    public function renderLogin()
+    {
 
-        if($this->auth->islogged()) $this->redirectToRoute('home');
+        if ($this->auth->islogged()) {
+            $this->redirectToRoute('home');
+            return;
+        }
 
         $msg = [];
 
-        if(!empty($_POST))
-        {
-            if(!empty($_POST['user_name']) && !empty($_POST['user_password']))
-            {
+        if (!empty($_POST)) {
+            if (!empty($_POST['user_name']) && !empty($_POST['user_password'])) {
                 $username = $_POST['user_name'];
                 $password = $_POST['user_password'];
 
                 $auth_value = $this->auth->login($username, $password);
-                if($auth_value) {
+                if ($auth_value) {
                     $this->redirectToRoute('home');
-                }else $msg['error'] = 'Le pseudo ou le mot de passe est incorrect.';
+                    return;
+                } else {
+                    $msg['error'] = 'Le pseudo ou le mot de passe est incorrect.';
+                }
 
 
-            } else $msg['error'] = 'Merci de remplir tous les champs.';
+            } else {
+                $msg['error'] = 'Merci de remplir tous les champs.';
+            }
 
         }
 
@@ -72,7 +83,8 @@ class SecurityController extends AbstractController
 
     }
 
-    public function logout(){
+    public function logout()
+    {
         session_unset();
         session_destroy();
         $this->redirectToRoute('home');

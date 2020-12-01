@@ -22,7 +22,7 @@ class AbstractController {
     function redirectToRoute($name) {
         $route = current($this->routes);
         if(!empty($this->routes[$name])) $route = $this->routes[$name];
-        Header('Location:'.URI.$route);
+        header('Location:'.URI.$route);
     }
 
     function render($view) {
