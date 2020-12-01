@@ -1,0 +1,56 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: lightgrey;
+    font-family: "Open Sans" , sans-serif;
+
+}
+
+.contour{
+    text-align: center;
+    width: 50%;
+    background-color: #ffffff;
+    padding: 1%;
+    border-radius: 20px;
+    box-shadow: grey 0px 2px 2px;
+    margin: 30% auto auto;
+}
+
+.titre_infos{
+    margin: 2% 0;
+    font-weight: bolder;
+}
+
+.line{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    width: 50%;
+    margin: 3% auto;
+
+}
+
+#button{
+    cursor: pointer;
+
+    width: 20%;
+    height: auto;
+    background: #000000;
+    color: #ffffff;
+    padding: 1%;
+    font-size: 11px;
+    border-radius: 20px;
+;
+
+
+}
+
+#button:hover{
+    background: #ffffff;
+    color: #000000;
+    border: #000000 solid;
+}

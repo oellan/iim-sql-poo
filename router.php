@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\HomeController;
+use App\Controller\profilController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
 use App\Controller\FriendController;
@@ -25,6 +26,9 @@ if(array_key_exists("page", $_GET)){
             break;
         case 'sondageResult':
             (new sondageResultController())->renderIndex();
+            break;
+        case 'profil':
+            (new profilController())->renderIndex();
             break;
         default:
             # code...
