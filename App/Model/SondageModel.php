@@ -33,7 +33,7 @@ ORDER BY polls.creation DESC',
     public function getById(int $id): array
     {
         return $this->prepare(
-            'SELECT polls.title, users.username, poll_responses.content, poll_responses.votes
+            'SELECT polls.title, users.username, poll_responses.content, poll_responses.votes, poll_responses.id
 FROM poll_responses
          INNER JOIN polls on poll_responses.poll_id = polls.id
          INNER JOIN users on polls.author_id = users.id
@@ -73,5 +73,10 @@ LIMIT :maxPolls',
         }
         $query .= substr($queryFragment, 1);
         return $this->prepare($query, $responses);
+    }
+
+    public function addVote(int $responseId)
+    {
+        $this->prepare('UPDATE poll_responses SET votes = votes + 1 WHERE id=:id', [':id' => $responseId]);
     }
 }
