@@ -19,4 +19,15 @@ class CommentModel
             ]
         );
     }
+
+    public function getCommentsOfPoll(int $pollId)
+    {
+        return $this->prepare(
+            'SELECT `comments`.`content`, `users`.`username` 
+FROM `comments` 
+    INNER JOIN `users` ON `comments`.`author_id` = `users`.`id`
+WHERE `poll_id` = ?',
+            [$pollId]
+        );
+    }
 }
