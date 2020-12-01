@@ -1,5 +1,4 @@
-<?php
-?>
+
 
 <!doctype html>
 <html lang="fr">
@@ -12,6 +11,9 @@
     <link rel="stylesheet" href="css/profil.css">
 </head>
 <body>
+<?php
+include ("include/header.php");
+?>
 
 <div class="contour">
         <h1>Mon profil</h1>

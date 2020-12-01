@@ -10,7 +10,9 @@
 
 </head>
 <body>
-
+<?php
+include ("include/header.php");
+?>
 <div class="contour">
 
     <h1>Recherchez des amis</h1>

@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/connexion.css">
 </head>
 <body>
+<?php
+include ("include/header.php");
+?>
 
 <div class="contour">
 

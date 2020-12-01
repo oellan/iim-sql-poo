@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="css/sondage.css">
 </head>
 <body>
+<?php
+include ("include/header.php");
+?>
 
 <div class="contour">
 
