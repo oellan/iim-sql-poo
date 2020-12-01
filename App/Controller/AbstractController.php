@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Core\security\auth;
+use Core\security\Auth;
 
 class AbstractController {
 
