@@ -24,19 +24,19 @@ include ("include/header.php");
             <p class="titre_infos">Mes informations :</p>
             <div class="line">
                 <p>Pseudo: <span class="pseudo"><?=$user['username']?></span></p>
-                <input type="text" name="change_username_value" placeholder="Pseudo"/>
+                <input class="change" type="text" name="change_username_value" placeholder="Pseudo"/>
                 <input type="submit" id="button" name="change_username_submit" value="Changer"/>
             </div>
 
             <div class="line">
                 <p>Mail: <span class="mail"><?=$user['email']?></span></p>
-                <input type="email" name="change_email_value" placeholder="Email"/>
+                <input class="change" type="email" name="change_email_value" placeholder="Email"/>
                 <input type="submit" id="button" name="change_email_submit" value="Changer"/>
             </div>
 
             <div class="line">
                 <p>Password: <span class="mail">*********</span></p>
-                <input type="password" name="change_password_value" placeholder="Mot de passe"/>
+                <input class="change" type="password" name="change_password_value" placeholder="Mot de passe"/>
                 <input type="submit" id="button" name="change_password_submit" value="Changer"/>
             </div>
         </form>
