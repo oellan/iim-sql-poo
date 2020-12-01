@@ -12,7 +12,10 @@ class FriendController extends AbstractController {
 
     public function renderIndex(){
 
-        if(!$this->auth->islogged()) $this->redirectToRoute('login');
+        if (!$this->auth->islogged()) {
+            $this->redirectToRoute('home');
+            return;
+        }
 
         $msg = null;
         $users = [];
