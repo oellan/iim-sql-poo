@@ -84,11 +84,11 @@ class SondageController extends AbstractController
             if(isset($_POST['response_submit'])){
                 if(isset($_POST['response'])) {
 
-                    $response_id = (int)$_POST['response'];
+                    $response_id = $poll[(int)$_POST['response']]['id'];
                     $this->model->addVote($response_id);
-                    /*$this->redirectToRoute("sondage_result", [
+                    $this->redirectToRoute("sondage_result", [
                         'id' => $id_poll,
-                    ]);*/
+                    ]);
 
                 }else $msg = "Merci de cocher une réponse.";
             }

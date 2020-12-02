@@ -23,11 +23,11 @@ include ("include/header.php");
         </p>
         <div class="line">
             <label for="response_1"><?=$responses[0]?></label>
-            <input type="radio" class="radio" name="response" value="0"  id="response_1"/>
+            <input required type="radio" class="radio" name="response" value="0"  id="response_1"/>
         </div>
         <div class="line">
             <label for="response_2"><?=$responses[1]?></label>
-            <input type="radio" class="radio" name="response" value="1" id="response_2"/>
+            <input required type="radio" class="radio" name="response" value="1" id="response_2"/>
         </div>
 
         <input type="submit" id="button" value="Envoyer" name="response_submit"/>
