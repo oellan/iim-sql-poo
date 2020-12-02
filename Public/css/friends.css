@@ -45,7 +45,7 @@ h1{
     cursor: pointer;
     width: 40%;
     background: #000000;
-    color: white;
+    color: white;;
     padding: 1%;
     font-size: 14px;
 }
@@ -61,3 +61,5 @@ table {
     width: 50%;
     margin: 40px auto;
 }
+
+
