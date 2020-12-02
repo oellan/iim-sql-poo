@@ -12,7 +12,7 @@ class SondageModel
     public function getAll(): array
     {
         return $this->query(
-            'SELECT polls.title, users.username, polls.creation 
+            'SELECT *
 FROM polls 
 INNER JOIN users on polls.author_id = users.id 
 ORDER BY polls.creation DESC'
@@ -74,6 +74,7 @@ LIMIT :maxPolls',
             $queryFragment .= ",($id,?,0)";
         }
         $query .= substr($queryFragment, 1);
+        $this->prepare($query, $responses);
         return $id;
     }
 

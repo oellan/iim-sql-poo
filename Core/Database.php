@@ -32,9 +32,9 @@ class Database
     {
         $query = $this->pdo->query($statement);
         if ($one) {
-            return $query->fetch(PDO::FETCH_OBJ);
+            return $query->fetch();
         }
-        return $query->fetchAll(PDO::FETCH_OBJ);
+        return $query->fetchAll();
     }
 
     /**

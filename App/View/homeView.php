@@ -16,17 +16,39 @@
         <h1>Bienvenue sondeur !</h1>
     </div>
 
-    <section class="sondages_amis">
+    <?php if(!$this->auth->islogged()) {?>
+        <p>Vous devez vous connecter pour voir les sondages!</p>
+    <?php } else { ?>
 
-        <p class="titre_sondage_amis">Sondages de vos amis</p>
+        <section class="sondages_amis">
 
-    </section>
-    <section class="sondages_passer">
+            <p class="titre_sondage_amis">Sondages de vos amis</p>
 
-        <p class="titre_sondage_passer">Sondages récents</p>
+            <?php
 
-    </section>
+                foreach($values['polls'] as $poll){
+                    if(!empty($values['friends_id']) && in_array($poll['author_id'], $values['friends_id'])){
+                        ?>
 
+                            <div>
+                                <h2><?=$poll['title']?></h2>
+                                <a href="<?=$this->getPath('poll_responses', ['id' => $poll[0]])?>">Répondre</a>
+                            </div>
+
+                        <?php
+                    }
+                }
+
+            ?>
+
+        </section>
+        <section class="sondages_passer">
+
+            <p class="titre_sondage_passer">Sondages récents</p>
+
+        </section>
+
+    <?php } ?>
 
 </main>
 

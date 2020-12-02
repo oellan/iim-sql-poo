@@ -19,6 +19,16 @@ class AbstractController {
         return $this->routes;
     }
 
+    function getPath($name, $params = [])
+    {
+        $route = current($this->routes);
+        if(!empty($this->routes[$name])) $route = $this->routes[$name];
+        foreach($params as $key => $param){
+            $route .= "&$key=$param";
+        }
+        return URI.$route;
+    }
+
     function redirectToRoute($name, $params = []) {
         $route = current($this->routes);
         if(!empty($this->routes[$name])) $route = $this->routes[$name];

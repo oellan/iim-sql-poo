@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Model\SondageModel;
 use App\Model\UserModel;
 
 class HomeController extends AbstractController {
@@ -11,6 +12,14 @@ class HomeController extends AbstractController {
     }
 
     public function renderIndex(){
+
+        $values = [];
+        if ($this->auth->islogged()) {
+            $values['polls'] = (new SondageModel())->getAll();
+            $values['friends_id'] = $this->model->getFriends($_SESSION['id']);
+        }
+
+
         require $this->render("homeView.php");
     }
 

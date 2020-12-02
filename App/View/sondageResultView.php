@@ -21,8 +21,8 @@ include ("include/header.php");
 
     <div class="com">
 
-        <p></p>
-        <p></p>
+        <p><?= $result['r1']['title'].': '.$result['r1']['q'].' ('.$result['r1']['p'].'%)'?></p>
+        <p><?= $result['r2']['title'].': '.$result['r2']['q'].' ('.$result['r2']['p'].'%)'?></p>
 
         <h2>Commentaires :</h2>
 

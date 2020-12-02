@@ -44,9 +44,9 @@ class SondageController extends AbstractController
                     if($id === false){
                         $msg = "Une erreur est survenue, merci de réessayer";
                     }else {
-                        $this->redirectToRoute('poll_responses', [
+                        /*$this->redirectToRoute('poll_responses', [
                             'id' => $id
-                        ]);
+                        ]);*/
                     }
 
                 }else $msg = 'Merci de remplir tous les champs.';
@@ -119,13 +119,13 @@ class SondageController extends AbstractController
             'r1' => [
                 'title' => $poll[0]['content'],
                 'q' => $poll[0]['votes'],
-                'p' => ($poll[0]['votes'] / $tr) * 100
+                'p' => round(($poll[0]['votes'] / $tr) * 100, 1)
             ],
 
             'r2' => [
                 'title' => $poll[1]['content'],
                 'q' => $poll[1]['votes'],
-                'p' => ($poll[1]['votes'] / $tr) * 100
+                'p' => round(($poll[1]['votes'] / $tr) * 100, 1)
             ],
         ];
 
