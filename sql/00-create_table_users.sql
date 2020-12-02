@@ -1,12 +1,13 @@
-DROP TABLE `users`;
+DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users`
 (
-    `id`       INT                        NOT NULL,
-    `username` TEXT                       NOT NULL COLLATE `utf8mb4_bin`,
-    `email`    TEXT                       NOT NULL COLLATE `utf8mb4_bin`,
-    `password` TEXT(60)                   NOT NULL COLLATE `ascii_bin`,
-    `friends`  TEXT COLLATE `utf8mb4_bin` NOT NULL
+    `id`        INT                        NOT NULL,
+    `username`  TEXT                       NOT NULL COLLATE `utf8mb4_bin`,
+    `email`     TEXT                       NOT NULL COLLATE `utf8mb4_bin`,
+    `password`  TEXT(60)                   NOT NULL COLLATE `ascii_bin`,
+    `friends`   TEXT COLLATE `utf8mb4_bin` NOT NULL,
+    `heartbeat` DATETIME                   NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = `utf8`
   COLLATE = `utf8_bin`;
