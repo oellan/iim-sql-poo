@@ -27,3 +27,17 @@ p{
     font-weight: bolder;
     margin:5%;
 }
+
+
+.line-polls{
+    background-color: #ffffff;
+    margin-left: 5%;
+    margin-top: 1%;
+    padding: 2%;
+    width: 30%;
+}
+
+.line-polls a {
+    text-decoration: none;
+    color: #000000;
+}

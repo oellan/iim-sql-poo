@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Accueil</title>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet"
+          href="css/home.css">
 
 </head>
 <body>
@@ -29,7 +30,7 @@
             foreach($values['my_polls'] as $poll){
                 ?>
 
-                <div>
+                <div class="line-polls">
                     <h2><?=$poll['title']?></h2>
                     <a href="<?=$this->getPath('sondage_result', ['id' => $poll[0]])?>">Voir les résultats</a>
                 </div>
@@ -51,7 +52,7 @@
                     if(!empty($values['friends_id']) && in_array($poll['author_id'], $values['friends_id'])){
                         ?>
 
-                            <div>
+                            <div class="line-polls">
                                 <h2><?=$poll['title']?></h2>
                                 <a href="<?=$this->getPath('poll_responses', ['id' => $poll[0]])?>">Répondre</a>
                             </div>

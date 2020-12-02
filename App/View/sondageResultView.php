@@ -25,13 +25,13 @@
 
         <p id="response_1"><?= $result['r1']['title'] . ': ' . $result['r1']['q'] . ' (' . $result['r1']['p'] . '%)' ?></p>
         <p id="response_2"><?= $result['r2']['title'] . ': ' . $result['r2']['q'] . ' (' . $result['r2']['p'] . '%)' ?></p>
-
-            <h2>Commentaires :</h2>
-
-        <form method="post">
+        <form class="form-mail" method="post">
             <input required type="email" name="share_email" placeholder="Email">
             <input type="submit" id="button" name="share_submit" value="Partager"/>
         </form>
+
+            <h2>Commentaires :</h2>
+
 
         <form class="write_com" method="post">
             <textarea id="com_content" name="com_content" placeholder="Ecrire un commentaire"></textarea>
