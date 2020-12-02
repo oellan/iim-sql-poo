@@ -33,6 +33,14 @@ include ("include/header.php");
         <input type="submit" id="button" value="Envoyer" name="response_submit"/>
     </form>
 
+    <p>
+        <?php
+
+        if($msg != null) echo $msg;
+
+        ?>
+    </p>
+
 </div>
 
 </body>

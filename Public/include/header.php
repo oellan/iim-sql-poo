@@ -10,7 +10,7 @@
         <?php
         if($this->auth->islogged()){
             echo '<a class="link" href="?page=logout">Se déconnecter</a>';
-            echo '<a href="?page=friendssearch">Ajouter un ami</a>';
+            echo '<a href="?page=friendssearch">Amis</a>';
             echo '<a href="?page=profil">Mon profil</a>';
             echo '<a href="?page=creaSondage">Créer un sondage</a>';
         }

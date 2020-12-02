@@ -10,8 +10,9 @@ class CommentModel
 
     public function addComment(int $authorId, int $pollId, string $content)
     {
+
         $this->prepare(
-            'INSERT INTO `comments`(`author_id`, `content`, `poll_id`) VALUES (?,?,?)',
+            'INSERT INTO comments(author_id, content, poll_id) VALUES (?,?,?)',
             [
                 $authorId,
                 $content,

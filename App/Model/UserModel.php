@@ -131,4 +131,24 @@ class UserModel extends Database{
 
         return $friends;
     }
+
+    public function getLastSeen(int $id): DateTime
+    {
+        $data = $this->prepare(
+            'SELECT `heartbeat` FROM `users` WHERE `id`=?',
+            [$id],
+            true
+        );
+        return DateTime::createFromFormat('Y-m-d H:i:s', $data['heartbeat']);
+    }
+
+    public function setLastSeen(int $id, DateTime $timestamp)
+    {
+        $this->prepare(
+            'UPDATE `users` SET `heartbeat` = ? WHERE `id` = ?', [
+                $id,
+                $timestamp->format('Y-m-d H:i:s'),
+            ]
+        );
+    }
 }

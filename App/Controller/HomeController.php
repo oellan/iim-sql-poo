@@ -15,7 +15,9 @@ class HomeController extends AbstractController {
 
         $values = [];
         if ($this->auth->islogged()) {
-            $values['polls'] = (new SondageModel())->getAll();
+            $poll_model = new SondageModel();
+            $values['my_polls'] = $poll_model->getAllById($_SESSION['id']);
+            $values['polls'] = $poll_model->getAll();
             $values['friends_id'] = $this->model->getFriends($_SESSION['id']);
         }
 

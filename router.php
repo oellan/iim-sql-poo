@@ -3,6 +3,7 @@
 // PAGES
 use App\Controller\AbstractController;
 use App\Controller\FriendController;
+use App\Controller\HeartbeatController;
 use App\Controller\HomeController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
@@ -36,6 +37,9 @@ if(array_key_exists("page", $_GET)){
             break;
         case 'creaSondage':
             (new SondageController())->renderCreate();
+            break;
+        case 'heartbeat':
+            (new HeartbeatController())->execute();
             break;
         default:
             (new AbstractController(null))->redirectToRoute('home');

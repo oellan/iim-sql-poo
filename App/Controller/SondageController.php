@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\CommentModel;
 use App\Model\SondageModel;
+use App\Model\UserModel;
 
 class SondageController extends AbstractController
 {
@@ -45,9 +46,9 @@ class SondageController extends AbstractController
                     if($id === false){
                         $msg = "Une erreur est survenue, merci de réessayer";
                     }else {
-                        /*$this->redirectToRoute('poll_responses', [
+                        $this->redirectToRoute('sondage_result', [
                             'id' => $id
-                        ]);*/
+                        ]);
                     }
 
                 }else $msg = 'Merci de remplir tous les champs.';
@@ -117,6 +118,7 @@ class SondageController extends AbstractController
         }
 
         $tr = (int)$poll[0]['votes'] + (int)$poll[1]['votes'];
+        if($tr <= 0) $tr = 1;
 
         $result = [
             'r1' => [
@@ -132,7 +134,38 @@ class SondageController extends AbstractController
             ],
         ];
 
+        $msg = null;
+        if (!empty($_POST)) {
+
+            if(isset($_POST['com_submit'])){
+                $content = $_POST['com_content'];
+                if(!empty($content)){
+                    $commentModel->addComment($_SESSION['id'], $id_poll, $content);
+                    $msg = "Commentaire posté.";
+                }else $msg = 'Merci de remplir tous les champs.';
+            }
+
+            if(isset($_POST['share_submit'])) {
+                $email = $_POST['share_email'];
+                if(!empty($email)){
+
+                    $header= "MIME-VERSION: 1.0\r\n";
+                    $header.='FROM:"IlyriaGames.fr"<support@ilyriagames.fr>' . "\n";
+                    $header.='Content-type:text/html; charset="utf-8"' . "\n";
+                    $header.='Content-Transfer-Encoding: 8bit';
+
+                    $message="<a href=".$this->getPath('poll_responses', ['id' => $id_poll])."</a>";
+
+                    mail($email, "[Sondage]Sondage Partagé", $message, $header);
+
+                    $msg = "Sondage partagé";
+                }else $msg = 'Merci de remplir tous les champs.';
+            }
+
+        }
+
         $comments = $commentModel->getCommentsOfPoll($id_poll);
+        $userModel = new UserModel();
 
         require $this->render("sondageResultView.php");
     }

@@ -19,15 +19,15 @@ ORDER BY polls.creation DESC'
         );
     }
 
-    public function getAllForUsername(string $username): array
+    public function getAllById(string $id): array
     {
         return $this->prepare(
-            'SELECT polls.title, users.username, polls.creation, polls.end_date
+            'SELECT *
 FROM polls 
 INNER JOIN users on polls.author_id = users.id
-WHERE polls.username = :username
+WHERE polls.author_id = :id
 ORDER BY polls.creation DESC',
-            [':username' => $username]
+            ['id' => $id]
         );
     }
 

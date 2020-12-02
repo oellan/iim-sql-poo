@@ -20,6 +20,27 @@
         <p>Vous devez vous connecter pour voir les sondages!</p>
     <?php } else { ?>
 
+        <section class="sondages_own">
+
+            <p class="titre_sondage_amis">Vos Sondages</p>
+
+            <?php
+
+            foreach($values['my_polls'] as $poll){
+                ?>
+
+                <div>
+                    <h2><?=$poll['title']?></h2>
+                    <a href="<?=$this->getPath('sondage_result', ['id' => $poll[0]])?>">Voir les résultats</a>
+                </div>
+
+                <?php
+            }
+
+            ?>
+
+        </section>
+
         <section class="sondages_amis">
 
             <p class="titre_sondage_amis">Sondages de vos amis</p>
@@ -40,11 +61,6 @@
                 }
 
             ?>
-
-        </section>
-        <section class="sondages_passer">
-
-            <p class="titre_sondage_passer">Sondages récents</p>
 
         </section>
 

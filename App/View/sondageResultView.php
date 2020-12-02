@@ -21,19 +21,41 @@ include ("include/header.php");
 
     <div class="com">
 
+        <p>
+            <?php
+
+            if($msg != null) echo $msg;
+
+            ?>
+        </p>
+
         <p><?= $result['r1']['title'].': '.$result['r1']['q'].' ('.$result['r1']['p'].'%)'?></p>
         <p><?= $result['r2']['title'].': '.$result['r2']['q'].' ('.$result['r2']['p'].'%)'?></p>
 
         <h2>Commentaires :</h2>
 
-        <div class="write_com">
-            <textarea id="com_content" name="com_content" placeholder="Ecrire un commentaire"></textarea>
-            <input type="button" id="button" value="Envoyer"/>
+        <form method="post">
+            <input required type="email" name="share_email" placeholder="Email">
+            <input type="submit" id="button" name="share_submit" value="Partager"/>
+        </form>
 
-        </div>
+        <form class="write_com" method="post">
+            <textarea id="com_content" name="com_content" placeholder="Ecrire un commentaire"></textarea>
+            <input type="submit" id="button" name="com_submit" value="Envoyer"/>
+
+        </form>
 
         <div class="show_com">
-
+            <?php
+            foreach ($comments as $comment):
+                ?>
+                <div class="comment">
+                    <div class="author">Pseudo: <?= $comment['username'] ?></div>
+                    <div class="content">Message: <?= $comment['content'] ?></div>
+                </div>
+            <?php
+            endforeach;
+            ?>
         </div>
 
 
