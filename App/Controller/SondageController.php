@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Model\CommentModel;
 use App\Model\SondageModel;
 
 class SondageController extends AbstractController
@@ -99,6 +100,8 @@ class SondageController extends AbstractController
 
     public function renderResults(){
 
+        $commentModel = new CommentModel();
+
         if(empty($_GET['id']) || !isset($_GET['id'])){
             $this->redirectToRoute("home");
             return;
@@ -128,6 +131,8 @@ class SondageController extends AbstractController
                 'p' => ($poll[1]['votes'] / $tr) * 100
             ],
         ];
+
+        $comments = $commentModel->getCommentsOfPoll($id_poll);
 
         require $this->render("sondageResultView.php");
     }
