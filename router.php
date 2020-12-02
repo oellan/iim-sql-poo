@@ -38,6 +38,9 @@ if(array_key_exists("page", $_GET)){
         case 'creaSondage':
             (new SondageController())->renderCreate();
             break;
+        case 'getResultsApi':
+            (new SondageController())->getResponses__API__();
+            break;
         case 'heartbeat':
             (new HeartbeatController())->execute();
             break;
