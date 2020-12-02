@@ -62,13 +62,13 @@ LIMIT :maxPolls',
                 ':title'    => $title,
                 ':authorId' => $authorId,
                 ':endTime'=>$endTime->format('Y-m-d H:i:s')
-            ]
+            ], true
         );
         if ($id === false) {
             return false;
         }
         $id = $id['id'];
-        $query = 'INSERT INTO poll_response(poll_id,content,votes) VALUES ';
+        $query = 'INSERT INTO poll_responses(poll_id,content,votes) VALUES ';
         $queryFragment = '';
         for ($i = 0, $iMax = count($responses); $i < $iMax; $i++) {
             $queryFragment .= ",($id,?,0)";
