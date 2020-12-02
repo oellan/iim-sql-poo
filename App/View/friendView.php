@@ -83,14 +83,19 @@
             if (!empty($friends)) {
 
                 foreach ($friends as $friend_id) {
-                    $friend = $this->model->getUserBy('id', $friend_id)
+                    $friend = $this->model->getUserBy('id', $friend_id);
+
+                    $last_visit = $this->model->getLastSeen($friend_id);
+                    $interval = date_diff($current_date, $current_date);
+                    $state = "ONLINE";
+                    if($interval->m > 5) $state = "OFFLINE"
                     ?>
                     <tr>
                         <form method="post">
                             <input type="hidden"
                                    name="user_id"
                                    value="<?= $friend['id'] ?>">
-                            <td><?= $friend['username'] ?></td>
+                            <td><?= $friend['username']."(".$state.")" ?></td>
                             <td>
                                 <button class="delete-btn"
                                         type="submit"

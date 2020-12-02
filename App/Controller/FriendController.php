@@ -49,6 +49,8 @@ class FriendController extends AbstractController {
 
         $friends = $this->model->getFriends($_SESSION['id']);
 
+        $current_date = new \DateTime();
+
         require $this->render("friendView.php");
     }
 
