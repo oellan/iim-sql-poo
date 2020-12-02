@@ -34,6 +34,6 @@ include ("include/header.php");
     </form>
 
 </div>
-
+    <?php include_once 'include/heartbeat_script.php' ?>
 </body>
 </html>

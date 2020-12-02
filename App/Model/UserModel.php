@@ -1,34 +1,44 @@
 <?php
+
 namespace App\Model;
 
 use Core\Database;
+use DateTime;
 
-class UserModel extends Database{
+class UserModel
+    extends Database
+{
 
     public function getUsersWhere($value)
     {
-        return $this->prepare("SELECT * FROM users WHERE username LIKE ? COLLATE utf8mb4_unicode_ci", [
-            "%".$value."%"
-        ]);
+        return $this->prepare(
+            "SELECT * FROM `users` WHERE `username` LIKE ? COLLATE `utf8mb4_unicode_ci`", [
+                                                                                            "%" . $value . "%",
+                                                                                        ]
+        );
     }
 
     public function getUsers()
     {
-        return $this->query("SELECT * FROM users");
+        return $this->query("SELECT * FROM `users`");
     }
 
     public function getUserBy($type, $value)
     {
-        return $this->prepare("SELECT * FROM users where $type = ?", [
-            $value
-        ], true);
+        return $this->prepare(
+            "SELECT * FROM users where $type = ?", [
+            $value,
+        ], true
+        );
     }
 
     public function getInfoUser($id, $type)
     {
-        $value = $this->prepare("SELECT $type FROM users WHERE id = ?", [
+        $value = $this->prepare(
+            "SELECT $type FROM users WHERE id = ?", [
             $id,
-        ], true);
+        ], true
+        );
 
         return $value[$type];
     }
@@ -36,31 +46,40 @@ class UserModel extends Database{
     public function addUser($username, $email, $password)
     {
         $hashpass = password_hash($password, PASSWORD_BCRYPT);
-        return $this->prepare("INSERT INTO users(username, email, password, friends) VALUES(?,?,?,?)", [
-            $username,
-            $email,
-            $hashpass,
-            ''
-        ]);
+        return $this->prepare(
+            "INSERT INTO `users`(`username`, `email`, `password`, `friends`) VALUES(?,?,?,?)", [
+                                                                                                 $username,
+                                                                                                 $email,
+                                                                                                 $hashpass,
+                                                                                                 '',
+                                                                                             ]
+        );
     }
 
     public function updateUser($id, $type, $value)
     {
-        if($type === "password") $value = password_hash($value, PASSWORD_BCRYPT);
-        return $this->prepare("UPDATE users SET $type = ? WHERE id = ?", [
-            $value,
-            $id,
-        ]);
+        if ($type === "password") {
+            $value = password_hash($value, PASSWORD_BCRYPT);
+        }
+        return $this->prepare(
+            "UPDATE users SET $type = ? WHERE id = ?", [
+                                                         $value,
+                                                         $id,
+                                                     ]
+        );
     }
 
     public function deleteUserBy($type, $value)
     {
-        if(!empty($this->getUserBy($type, $value)))
-        {
-            return $this->prepare("DELETE FROM `users` WHERE $type = ?", [
-                $value,
-            ]);
-        }else return false;
+        if (!empty($this->getUserBy($type, $value))) {
+            return $this->prepare(
+                "DELETE FROM `users` WHERE $type = ?", [
+                                                         $value,
+                                                     ]
+            );
+        } else {
+            return false;
+        }
     }
 
 
@@ -79,7 +98,9 @@ class UserModel extends Database{
                 } else {
 
                     $new_friends = $friends_user . "/" . $params['id_friend'];
-                    if (empty($friends_user)) $new_friends = $params['id_friend'];
+                    if (empty($friends_user)) {
+                        $new_friends = $params['id_friend'];
+                    }
 
                     $this->updateUser($params['id'], 'friends', $new_friends);
 
@@ -96,9 +117,14 @@ class UserModel extends Database{
 
                     $new_friends = "";
                     for ($i = 0; $i < sizeof($friends); $i++) {
-                        if ((int)$friends[$i] === (int)$params['id_friend']) continue;
-                        if (empty($new_friends)) $new_friends .= $friends[$i];
-                        else $new_friends .= "/" . $friends[$i];
+                        if ((int)$friends[$i] === (int)$params['id_friend']) {
+                            continue;
+                        }
+                        if (empty($new_friends)) {
+                            $new_friends .= $friends[$i];
+                        } else {
+                            $new_friends .= "/" . $friends[$i];
+                        }
                     }
 
 
@@ -113,22 +139,47 @@ class UserModel extends Database{
         }
 
         // MAKE FUNCTION TO FRIEND
-        if ($reverse){
-            $this->friendMethods($type, [
-                'id' => $params['id_friend'],
-                'id_friend' => $params['id']
-            ], false);
+        if ($reverse) {
+            $this->friendMethods(
+                $type, [
+                'id'        => $params['id_friend'],
+                'id_friend' => $params['id'],
+            ], false
+            );
         }
 
         return $msg;
     }
 
 
-    public function getFriends($id){
+    public function getFriends($id)
+    {
         $friends = $this->getInfoUser($id, 'friends');
-        if(empty($friends)) $friends = [];
-        else $friends = explode("/", $friends);
+        if (empty($friends)) {
+            $friends = [];
+        } else {
+            $friends = explode("/", $friends);
+        }
 
         return $friends;
+    }
+
+    public function getLastSeen(int $id): DateTime
+    {
+        $data = $this->prepare(
+            'SELECT `heartbeat` FROM `users` WHERE `id`=?',
+            [$id],
+            true
+        );
+    }
+
+    public function setLastSeen(int $id, DateTime $timestamp)
+    {
+        $this->prepare(
+            'UPDATE `users` SET `heartbeat` = ? WHERE `id` = ?', [
+                                                                   $id,
+                                                                   $timestamp->format('Y-m-d H:i:s'),
+                                                               ]
+        );
     }
 }
