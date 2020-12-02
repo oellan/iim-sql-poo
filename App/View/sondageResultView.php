@@ -1,25 +1,25 @@
-
-
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
     <title>Résultat du sondage</title>
-    <link rel="stylesheet" href="css/sondageResult.css">
+    <link rel="stylesheet"
+          href="css/sondageResult.css">
 </head>
 <body>
-<?php
-include ("include/header.php");
-?>
+    <?php
+    include("include/header.php");
+    ?>
 
-<div class="contour">
+    <div class="contour">
 
-    <h1>Votre vote a été pris en compte!</h1>
+        <h1>Votre vote a été pris en compte!</h1>
 
-    <div class="com">
+        <div class="responses">
 
         <p>
             <?php
@@ -32,7 +32,7 @@ include ("include/header.php");
         <p><?= $result['r1']['title'].': '.$result['r1']['q'].' ('.$result['r1']['p'].'%)'?></p>
         <p><?= $result['r2']['title'].': '.$result['r2']['q'].' ('.$result['r2']['p'].'%)'?></p>
 
-        <h2>Commentaires :</h2>
+            <h2>Commentaires :</h2>
 
         <form method="post">
             <input required type="email" name="share_email" placeholder="Email">
@@ -58,8 +58,24 @@ include ("include/header.php");
             ?>
         </div>
     </div>
-</div>
+    <script>
+        function updateResponses() {
+            fetch('?page=getResultsApi&id=' + <?= $_GET['id'] ?>, {
+                method: 'GET'
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    const voteTotal = data[0]['votes'] + data[1]['votes'];
+                    [0, 1].forEach((id) => {
+                        const responseElement = document.getElementById('response_' + (id + 1));
+                        responseElement.innerText = `${data[id]['content']}: ${data[id]['votes']} (${data[id]['votes'] / voteTotal * 100}%)`;
+                    })
+                    setTimeout(updateResponses, 3000);
+                })
+        }
 
+        updateResponses()
+    </script>
     <?php include_once 'include/heartbeat_script.php' ?>
 </body>
 </html>
