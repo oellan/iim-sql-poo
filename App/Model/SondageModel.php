@@ -13,9 +13,9 @@ class SondageModel
     {
         return $this->query(
             'SELECT *
-FROM polls 
-INNER JOIN users on polls.author_id = users.id 
-ORDER BY polls.creation DESC'
+FROM `polls` 
+INNER JOIN `users` on `polls`.`author_id` = `users`.`id` 
+ORDER BY `polls`.`creation` DESC'
         );
     }
 
@@ -68,7 +68,7 @@ LIMIT :maxPolls',
             return false;
         }
         $id = $id['id'];
-        $query = 'INSERT INTO poll_responses(poll_id,content,votes) VALUES ';
+        $query = 'INSERT INTO `poll_responses`(`poll_id`,`content`,`votes`) VALUES ';
         $queryFragment = '';
         for ($i = 0, $iMax = count($responses); $i < $iMax; $i++) {
             $queryFragment .= ",($id,?,0)";

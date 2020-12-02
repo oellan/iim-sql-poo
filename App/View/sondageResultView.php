@@ -57,13 +57,9 @@ include ("include/header.php");
             endforeach;
             ?>
         </div>
-
-
-
     </div>
 </div>
 
-
-
+    <?php include_once 'include/heartbeat_script.php' ?>
 </body>
 </html>

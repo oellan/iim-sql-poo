@@ -67,6 +67,6 @@
     <?php } ?>
 
 </main>
-
+    <?php include_once 'include/heartbeat_script.php' ?>
 </body>
 </html>

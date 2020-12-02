@@ -169,4 +169,18 @@ class SondageController extends AbstractController
 
         require $this->render("sondageResultView.php");
     }
+
+    public function getResponses__API__()
+    {
+        if (!array_key_exists('id', $_GET)) {
+            echo '[]';
+            return;
+        }
+        $data = $this->model->getById($_GET['id']);
+        $responses = [];
+        foreach ($data as $response) {
+            $responses[] = '{"id": ' . $response['id'] . ',"votes": ' . $response['votes'] . ',"content": "' . $response['content'] . '"}';
+        }
+        echo '[' . implode(',', $responses) . ']';
+    }
 }

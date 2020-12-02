@@ -36,6 +36,6 @@ include ("include/header.php");
         <input type="submit" id="button" value="Demander à mes amis" name="poll_submit"/>
     </form>
 </div>
-
+    <?php include_once 'include/heartbeat_script.php' ?>
 </body>
 </html>

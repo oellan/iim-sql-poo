@@ -8,7 +8,7 @@ use App\Controller\HomeController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
 
-if(array_key_exists("page", $_GET)){
+if(array_key_exists("page", $_GET)) {
     switch ($_GET["page"]) {
 
         case 'home':
@@ -38,6 +38,9 @@ if(array_key_exists("page", $_GET)){
         case 'creaSondage':
             (new SondageController())->renderCreate();
             break;
+        case 'getResultsApi':
+            (new SondageController())->getResponses__API__();
+            break;
         case 'heartbeat':
             (new HeartbeatController())->execute();
             break;
@@ -46,14 +49,7 @@ if(array_key_exists("page", $_GET)){
             break;
     }
 
-// FUNCTIONS
-} else if(array_key_exists("function", $_GET)){
-    switch ($_GET["function"]) {
-        default:
-            break;
-    }
-
-} else {
+}else {
     $controller = new HomeController();
     $controller->renderIndex();
 }
