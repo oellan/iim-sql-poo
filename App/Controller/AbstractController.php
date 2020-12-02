@@ -37,7 +37,8 @@ class AbstractController {
             "home" => "",
             "register" => "?page=register",
             "login" => "?page=login",
-            "friendssearch" => "?page=friendssearch"
+            "friendssearch" => "?page=friendssearch",
+            "pollresponses" => "?page=sondage"
         ]);
     }
 

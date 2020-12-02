@@ -2,12 +2,10 @@
 
 // PAGES
 use App\Controller\AbstractController;
-use App\Controller\creaSondageController;
 use App\Controller\FriendController;
 use App\Controller\HomeController;
 use App\Controller\SecurityController;
 use App\Controller\SondageController;
-use App\Controller\sondageResultController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
@@ -25,19 +23,19 @@ if(array_key_exists("page", $_GET)){
             (new SecurityController())->logout();
             break;
         case 'sondage':
-            (new SondageController())->renderIndex();
+            (new SondageController())->renderResponses();
             break;
         case 'friendssearch':
             (new FriendController())->renderIndex();
             break;
         case 'sondageResult':
-            (new sondageResultController())->renderIndex();
+            (new SondageController())->renderResults();
             break;
         case 'profil':
             (new HomeController())->renderProfile();
             break;
         case 'creaSondage':
-            (new creaSondageController())->renderIndex();
+            (new SondageController())->renderCreate();
             break;
         default:
             (new AbstractController(null))->redirectToRoute('home');

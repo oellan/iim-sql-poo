@@ -57,7 +57,7 @@ LIMIT :maxPolls',
     public function addPoll(string $title, int $authorId, array $responses, DateTime $endTime)
     {
         $id = $this->prepare(
-            'INSERT INTO polls(title, author_id, creation, end_time) VALUES (:title,:authorId,NOW(),:endTime) RETURNING id',
+            'INSERT INTO polls(title, author_id, creation, end_date) VALUES (:title,:authorId,NOW(),:endTime) RETURNING id',
             [
                 ':title'    => $title,
                 ':authorId' => $authorId,

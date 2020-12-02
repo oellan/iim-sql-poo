@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use App\Model\SondageModel;
+
 class SondageController extends AbstractController
 {
 
@@ -11,10 +13,54 @@ class SondageController extends AbstractController
      */
     public function __construct()
     {
-        parent::__construct(null);
+        parent::__construct(new SondageModel());
     }
 
-    public function renderIndex(){
+    public function renderResponses(){
         require $this->render("sondageView.php");
+    }
+
+    public function renderCreate(){
+
+        if (!$this->auth->islogged()) {
+            $this->redirectToRoute('home');
+            return;
+        }
+
+        $msg = null;
+
+        if (!empty($_POST)) {
+
+            if(isset($_POST['poll_submit'])){
+                $title = $_POST['poll_title'];
+                $response1 = $_POST['poll_response_1'];
+                $response2 = $_POST['poll_response_2'];
+                $date = $_POST['poll_date'];
+                $time = $_POST['poll_time'];
+                if(!empty($title) && !empty($response1) && !empty($response2) && !empty($date) && !empty($time)){
+
+                    $datetime = new \DateTime($date.$time);
+
+                    $state = $this->model->addPoll($title, $_SESSION['id'], [
+                        $response1,
+                        $response2
+                    ], $datetime);
+
+                    if(!$state){
+                        $msg = "Une erreur est survenue, merci de réessayer";
+                    }else {
+                        $this->redirectToRoute('pollresponses');
+                    }
+
+                }else $msg = 'Merci de remplir tous les champs.';
+            }
+
+        }
+
+        require $this->render("creaSondageView.php");
+    }
+
+    public function renderResults(){
+        require $this->render("sondageResultView.php");
     }
 }
