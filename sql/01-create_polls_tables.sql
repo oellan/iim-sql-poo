@@ -7,7 +7,7 @@ CREATE TABLE `polls`
     `title`     TEXT                                 NULL,
     `author_id` INT                                  NULL,
     `creation`  DATETIME DEFAULT current_timestamp() NOT NULL,
-    'end_date'  DATETIME                             NOT NULL,
+    `end_date`  DATETIME                             NOT NULL,
     CONSTRAINT `polls_id_uindex`
         UNIQUE (`id`),
     CONSTRAINT `polls_users_id_fk`
