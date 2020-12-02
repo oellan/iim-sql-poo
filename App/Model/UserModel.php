@@ -171,6 +171,7 @@ class UserModel
             [$id],
             true
         );
+        return DateTime::createFromFormat('Y-m-d H:i:s', $data['heartbeat']);
     }
 
     public function setLastSeen(int $id, DateTime $timestamp)
