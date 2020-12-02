@@ -33,11 +33,17 @@ include ("include/header.php");
         </div>
 
         <div class="show_com">
-
+            <?php
+            foreach ($comments as $comment):
+                ?>
+                <div class="comment">
+                    <div class="author"><?= $comment['username'] ?></div>
+                    <div class="content"><?= $comment['content'] ?></div>
+                </div>
+            <?php
+            endforeach;
+            ?>
         </div>
-
-
-
     </div>
 </div>
 
