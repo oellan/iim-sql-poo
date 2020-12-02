@@ -16,17 +16,12 @@ class SondageController extends AbstractController
         parent::__construct(new SondageModel());
     }
 
-    public function renderResponses(){
-        require $this->render("sondageView.php");
-    }
-
     public function renderCreate(){
 
         if (!$this->auth->islogged()) {
             $this->redirectToRoute('home');
             return;
         }
-
         $msg = null;
 
         if (!empty($_POST)) {
@@ -41,15 +36,17 @@ class SondageController extends AbstractController
 
                     $datetime = new \DateTime($date.$time);
 
-                    $state = $this->model->addPoll($title, $_SESSION['id'], [
+                    $id = $this->model->addPoll($title, $_SESSION['id'], [
                         $response1,
                         $response2
                     ], $datetime);
 
-                    if(!$state){
+                    if($id === false){
                         $msg = "Une erreur est survenue, merci de réessayer";
                     }else {
-                        $this->redirectToRoute('pollresponses');
+                        $this->redirectToRoute('poll_responses', [
+                            'id' => $id
+                        ]);
                     }
 
                 }else $msg = 'Merci de remplir tous les champs.';
@@ -60,7 +57,78 @@ class SondageController extends AbstractController
         require $this->render("creaSondageView.php");
     }
 
+    public function renderResponses(){
+
+        if(empty($_GET['id']) || !isset($_GET['id'])){
+            $this->redirectToRoute("home");
+            return;
+        }
+
+        $id_poll = $_GET['id'];
+
+        $poll = $this->model->getById($id_poll);
+
+        if(empty($poll)){
+            $this->redirectToRoute("home");
+            return;
+        }
+
+        $responses = [
+            0 => $poll[0]['content'],
+            1 => $poll[1]['content']
+        ];
+
+        $msg = null;
+        if (!empty($_POST)) {
+
+            if(isset($_POST['response_submit'])){
+                if(isset($_POST['response'])) {
+
+                    $response_id = (int)$_POST['response'];
+                    $this->model->addVote($response_id);
+                    /*$this->redirectToRoute("sondage_result", [
+                        'id' => $id_poll,
+                    ]);*/
+
+                }else $msg = "Merci de cocher une réponse.";
+            }
+        }
+
+        require $this->render("sondageView.php");
+    }
+
     public function renderResults(){
+
+        if(empty($_GET['id']) || !isset($_GET['id'])){
+            $this->redirectToRoute("home");
+            return;
+        }
+
+        $id_poll = $_GET['id'];
+
+        $poll = $this->model->getById($id_poll);
+
+        if(empty($poll)){
+            $this->redirectToRoute("home");
+            return;
+        }
+
+        $tr = (int)$poll[0]['votes'] + (int)$poll[1]['votes'];
+
+        $result = [
+            'r1' => [
+                'title' => $poll[0]['content'],
+                'q' => $poll[0]['votes'],
+                'p' => ($poll[0]['votes'] / $tr) * 100
+            ],
+
+            'r2' => [
+                'title' => $poll[1]['content'],
+                'q' => $poll[1]['votes'],
+                'p' => ($poll[1]['votes'] / $tr) * 100
+            ],
+        ];
+
         require $this->render("sondageResultView.php");
     }
 }

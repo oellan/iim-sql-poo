@@ -19,9 +19,12 @@ class AbstractController {
         return $this->routes;
     }
 
-    function redirectToRoute($name) {
+    function redirectToRoute($name, $params = []) {
         $route = current($this->routes);
         if(!empty($this->routes[$name])) $route = $this->routes[$name];
+        foreach($params as $key => $param){
+            $route .= "&$key=$param";
+        }
         header('Location:'.URI.$route);
     }
 
@@ -38,7 +41,8 @@ class AbstractController {
             "register" => "?page=register",
             "login" => "?page=login",
             "friendssearch" => "?page=friendssearch",
-            "pollresponses" => "?page=sondage"
+            "poll_responses" => "?page=sondage",
+            "sondage_result" => "?page=sondageResult",
         ]);
     }
 

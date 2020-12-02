@@ -17,9 +17,12 @@ include ("include/header.php");
 
 <div class="contour">
 
-    <h1>Vous avez eu <span id="result">faux</span> !</h1>
+    <h1>Votre vote a été pris en compte!</h1>
 
     <div class="com">
+
+        <p></p>
+        <p></p>
 
         <h2>Commentaires :</h2>
 
