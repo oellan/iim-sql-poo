@@ -39,7 +39,18 @@ class SondageController extends AbstractController
                 $time = $_POST['poll_time'];
                 if(!empty($title) && !empty($response1) && !empty($response2) && !empty($date) && !empty($time)){
 
-                    //$this->model->addPoll($title);
+                    $datetime = new \DateTime($date.$time);
+
+                    $state = $this->model->addPoll($title, $_SESSION['id'], [
+                        $response1,
+                        $response2
+                    ], $datetime);
+
+                    if(!$state){
+                        $msg = "Une erreur est survenue, merci de réessayer";
+                    }else {
+                        $this->redirectToRoute('pollresponses');
+                    }
 
                 }else $msg = 'Merci de remplir tous les champs.';
             }
