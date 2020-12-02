@@ -21,16 +21,10 @@
 
         <div class="responses">
 
-        <p>
-            <?php
+        <?php if($msg != null) echo '<p>'.$msg.'</p>'; ?>
 
-            if($msg != null) echo $msg;
-
-            ?>
-        </p>
-
-        <p><?= $result['r1']['title'].': '.$result['r1']['q'].' ('.$result['r1']['p'].'%)'?></p>
-        <p><?= $result['r2']['title'].': '.$result['r2']['q'].' ('.$result['r2']['p'].'%)'?></p>
+        <p id="response_1"><?= $result['r1']['title'] . ': ' . $result['r1']['q'] . ' (' . $result['r1']['p'] . '%)' ?></p>
+        <p id="response_2"><?= $result['r2']['title'] . ': ' . $result['r2']['q'] . ' (' . $result['r2']['p'] . '%)' ?></p>
 
             <h2>Commentaires :</h2>
 
